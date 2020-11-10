@@ -1,0 +1,10 @@
+{
+    "env" : {
+        "MYSQL_USER": "root",
+        "MYSQL_PASS": "root",
+        "MYSQL_DATABASE": "poupador",
+        "MYSQL_HOST": "localhost",
+        "MYSQL_PORT": 3306,
+        "JWT_KEY": "JSRBM1@49bS#2"
+    }
+}
