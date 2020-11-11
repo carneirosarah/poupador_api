@@ -103,3 +103,50 @@ exports.validate = async (req, res, next) => {
         return res.status(401).send({ message: 'Authentication Failure'})
     }
 }
+
+exports.updatePass = async (req, res, next) => {
+
+    try {
+
+        let result = await mysql.execute('SELECT * FROM users WHERE id_user = ?', [req.body.id])
+
+        if (result.length < 1) {
+    
+            res.status(401).send({ message: 'User already exists'})
+        }
+        
+        if (await bcrypt.compareSync(req.body.pass, result[0].pass_user)) {
+
+            const hash = await bcrypt.hash(req.body.newpass, 10) 
+            let result = await mysql.execute('UPDATE users set pass_user = ? WHERE id_user = ?', [hash, req.body.id])
+
+            return res.status(200).send({ 
+                message: 'Password updated with success',
+                status: 200
+            })
+        } 
+                    
+        return res.status(401).send({ message: 'Update Failure', status: 401})
+
+    } catch (error) {
+
+        return res.status(401).send({ message: 'Update Failure', status: 401})
+    }
+}
+
+exports.delete = async (req, res, next) => {
+
+    try {
+
+        let result = await mysql.execute('DELETE FROM users WHERE id_user = ?', [req.params.id])
+
+        return res.status(200).send({ 
+            message: 'User deleted with success',
+            status: 200
+        })
+                    
+    } catch (error) {
+
+        return res.status(401).send({ message: 'Delete Failure', status: 401})
+    }
+}
