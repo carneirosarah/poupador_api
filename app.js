@@ -4,6 +4,8 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 
 const userRoute = require('./routes/users')
+const transactionRoute = require('./routes/transaction')
+
 
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -27,6 +29,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/users', userRoute)
+app.use('/transaction', transactionRoute)
 
 app.use((req, res, next) => {
 

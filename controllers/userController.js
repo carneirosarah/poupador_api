@@ -23,7 +23,7 @@ exports.signUp = async (req, res, next) => {
                 name: req.body.name
             }, "JSRBM1@49bS#2",
             {
-                expiresIn: "24h"
+                expiresIn: "600s"
             })
 
             response = {
@@ -54,7 +54,7 @@ exports.signIn = async (req, res, next) => {
 
         if (result.length < 1) {
     
-            res.status(401).send({ message: 'User already exists'})
+            res.status(401).send({ message: 'Authentication Failure'})
         }
         
         if (await bcrypt.compareSync(req.body.pass, result[0].pass_user)) {
