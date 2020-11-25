@@ -10,7 +10,7 @@ exports.post = async (req, res, next) => {
             
             response = {
                 message: 'Transaction created with sucess!!',
-                trasaction: {
+                transaction: {
                     id: result.insertId,
                     type: req.body.type,
                     date: req.body.date,
