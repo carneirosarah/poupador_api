@@ -112,7 +112,7 @@ exports.updatePass = async (req, res, next) => {
 
         if (result.length < 1) {
     
-            res.status(401).send({ message: 'User already exists'})
+            res.status(401).send({ message: 'User doesn\'t exists'})
         }
         
         if (await bcrypt.compareSync(req.body.pass, result[0].pass_user)) {
